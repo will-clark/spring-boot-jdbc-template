@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico">
+
+    <title>Teams Editor</title>
+
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/application.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="row">
+        <h1>Teams Editor</h1>
+        
+        <button name="add" class="btn btn-success pull-right">Add Team</button>
+        
+        <table id="teams" class="table table-striped">
+	        <thead>
+	        	<tr>
+		        	<th>City</th>
+		        	<th>Name</th>
+		        	<th>Last Modified</th>
+		        	<th></th>			
+		        	<th></th>
+	        	</tr>
+	        </thead>
+			<tbody>
+			</tbody>        
+        </table>
+                
+		<form id="new">
+		    <h1>Add Team</h1>
+		    
+			<div class="form-group">
+				<label for="city">City</label>
+				<input type="text" class="form-control" name="city" placeholder="Boston" required>
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" name="name" placeholder="Red Sox" required>
+			</div>
+			<!--
+			<div class="checkbox">
+				<label><input type="checkbox" name="colors" value="black">Black</label>
+				<label><input type="checkbox" name="colors" value="blue">Blue</label>
+				<label><input type="checkbox" name="colors" value="gray">Gray</label>
+				<label><input type="checkbox" name="colors" value="green">Green</label>
+				<label><input type="checkbox" name="colors" value="orange">Orange</label>
+				<label><input type="checkbox" name="colors" value="red">Red</label>
+				<label><input type="checkbox" name="colors" value="yellow">Yellow</label>
+				<label><input type="checkbox" name="colors" value="white">White</label>
+			</div>
+			-->
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		
+		<form id="edit">
+			<input type="hidden" name="id" value="">
+			
+		    <h1>Edit Team</h1>
+		    
+			<div class="form-group">
+				<label for="city">City</label>
+				<input type="text" class="form-control" name="city" placeholder="Boston" required>
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" name="name" placeholder="Red Sox" required>
+			</div>
+			<!--
+			<div class="checkbox">
+				<label><input type="checkbox" name="colors" value="black">Black</label>
+				<label><input type="checkbox" name="colors" value="blue">Blue</label>
+				<label><input type="checkbox" name="colors" value="gray">Gray</label>
+				<label><input type="checkbox" name="colors" value="green">Green</label>
+				<label><input type="checkbox" name="colors" value="orange">Orange</label>
+				<label><input type="checkbox" name="colors" value="red">Red</label>
+				<label><input type="checkbox" name="colors" value="yellow">Yellow</label>
+				<label><input type="checkbox" name="colors" value="white">White</label>
+			</div>
+			-->
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>		
+
+      </div>
+
+    </div>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/application.js"></script>
+
+  </body>
+</html>

@@ -32,7 +32,7 @@ public class TeamDAO {
 		jdbcTemplate.update(
 			new PreparedStatementCreator()  {
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement stmt = connection.prepareStatement("INSERT INTO " + TABLE + " (CREATED, MODIFIED, CITY, NAME, COLORS) VALUES (?, ?, ?, ?, ?, ?)", new String[]{"ID"});
+	                PreparedStatement stmt = connection.prepareStatement("INSERT INTO " + TABLE + " (CREATED, MODIFIED, CITY, NAME, COLORS) VALUES (?, ?, ?, ?, ?)", new String[]{"ID"});
 	                
 	                stmt.setTimestamp(1, JdbcTemplateUtils.toTimestamp(team.getCreated()));
 	                stmt.setTimestamp(2, JdbcTemplateUtils.toTimestamp(team.getModified()));
@@ -53,13 +53,15 @@ public class TeamDAO {
 		jdbcTemplate.update(
 			new PreparedStatementCreator()  {
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement stmt = connection.prepareStatement("UPDATE " + TABLE + " SET MODIFIED=?, CITY=?, NAME=?, COLORS=?");
+	                PreparedStatement stmt = connection.prepareStatement("UPDATE " + TABLE + " SET MODIFIED=?, CITY=?, NAME=?, COLORS=? WHERE ID=?");
 	                
 	                stmt.setTimestamp(1, JdbcTemplateUtils.toTimestamp(team.getModified()));
 	                stmt.setString(2, team.getCity());
 	                stmt.setString(3, team.getName());
 	                stmt.setArray(4, JdbcTemplateUtils.toSqlArray(connection, team.getColors()));
-	
+
+	                stmt.setLong(5, team.getId());
+
 	                return stmt;
 	            }
         });		
@@ -71,9 +73,11 @@ public class TeamDAO {
 		jdbcTemplate.update(
 			new PreparedStatementCreator()  {
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement stmt = connection.prepareStatement("UPDATE " + TABLE + " SET DELETED=?");
+	                PreparedStatement stmt = connection.prepareStatement("UPDATE " + TABLE + " SET DELETED=? WHERE ID=?");
 	                
 	                stmt.setTimestamp(1, JdbcTemplateUtils.toTimestamp(team.getDeleted()));
+	                
+	                stmt.setLong(2, team.getId());
 	
 	                return stmt;
 	            }
@@ -84,7 +88,7 @@ public class TeamDAO {
 		List<Team> list = jdbcTemplate.query(
 			new PreparedStatementCreator()  {
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                PreparedStatement stmt = connection.prepareStatement("SELECT ID, CREATED, MODIFIED, CITY, NAME, COLORS FROM " + TABLE + " WHERE ID = ?");
+	                PreparedStatement stmt = connection.prepareStatement("SELECT * FROM " + TABLE + " WHERE ID = ?");
 	                
 	                stmt.setLong(1, id);
 	
@@ -100,7 +104,7 @@ public class TeamDAO {
 		List<Team> list = jdbcTemplate.query(
 			new PreparedStatementCreator()  {
 	            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-	                return connection.prepareStatement("SELECT ID, CREATED, MODIFIED, CITY, NAME, COLORS FROM " + TABLE + " WHERE DELETED IS NULL");
+	                return connection.prepareStatement("SELECT * FROM " + TABLE + " WHERE DELETED IS NULL");
 	            }
 			}
 		, parser());

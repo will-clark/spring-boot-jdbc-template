@@ -37,7 +37,7 @@ public class TeamController {
 		return team;
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Team update(@PathVariable("id") long id, @RequestBody Team update) throws FileNotFoundException {
 		Team team = service.find(id);
 		if (team == null) throw new FileNotFoundException("team id = " + id + " was not found in the database");
@@ -51,7 +51,7 @@ public class TeamController {
 		return team;
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("id") long id) throws FileNotFoundException {
 		Team team = service.find(id);
 		if (team == null) throw new FileNotFoundException("team id = " + id + " was not found in the database");
